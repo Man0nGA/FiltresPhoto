@@ -1,0 +1,540 @@
+body {
+	background-color:#fff;
+	display:block;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	background-image: url('../images/fond_aqua_bleu.jpg');
+	background-position:top center;
+	background-size:100% auto;
+	background-repeat:no-repeat;
+	font-family:Merienda;
+}
+#bandeau {
+	display:block;
+	position:absolute;
+	width:100%;
+	height:100px;
+	line-height:100px;
+	vertical-align:middle;
+	text-align:center;
+}
+#bandeau h1 {
+	margin:0;
+	padding:0;
+	font-size:50px;
+	font-family:'Rock Salt', sans-serif;
+	text-shadow:5px 5px 7px #444;
+}
+
+/*****************************/
+/*** Cadre central de base ***/
+/*****************************/
+#container_cadre {
+	display:block;
+	position:absolute;
+	width:624px;
+	height:474px;
+	left:calc(50% - 300px - 20px);
+	top: calc(50% - 225px + 50px - 20px);
+ 	background-color:transparent;
+	border:8px solid #404040;
+	box-shadow:12px 12px 22px #444;
+}
+#container_image {
+	display:block;
+	position:absolute;
+	width:calc(100% - 24px);
+	height:calc(100% - 24px);
+	left:0;
+	top: 0;
+	background-color:#fff;
+	border:12px solid #1d1d1d;
+}
+#barre_verticale {
+	display:block;
+	position:absolute;
+	top:0;
+	left:calc(50% - 4px);
+	width:8px;
+	height:100%;
+	background-color:#666;
+	opacity:0.7;
+	z-index:4;
+	visibility:hidden;
+}
+#zone_depose_fichier {
+	display:block;
+	position:relative;
+	margin:60px;
+	border:2px #888 dashed;
+	width:calc(100% - 124px);
+	height:calc(100% - 124px);
+	border-radius:12px;
+	z-index:10;
+}
+#image_appli_manon {
+	 font-size:18px;
+	 margin:10px;
+}
+#message_depose_fichier {
+	display:block;
+	position:relative;
+	width:100%;
+	margin-top:20%;
+	text-align:center;
+	font-size:20px;
+	color:#888;
+}
+span.plus_fonce {
+	color:#555;
+}
+span.plus_petit {
+	font-size:80%;	
+}
+#message_depose_fichier #icone_depose_fichier {
+	margin-top:20px;
+	font-family:icomoon;
+	font-size:48px;
+	color:#555;
+	line-height:48px;
+	transition: font-size,line-height 0.5s ease;
+}
+#message_erreur_taille {
+	display:block;
+	position:absolute;
+	top:30px;
+	width:100%;
+	height:40px;
+	font-size:14px;
+	text-align:center;
+	color:#f00;
+}
+#ombre_interne {
+	display:block;
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	z-index:3;
+	box-shadow: 0 0 10px 3px #252525 inset;
+}
+
+/**************************************************/
+/*** Affichage de l'image et de l'image filtrée ***/
+/**************************************************/
+#container_image #image_origine_monet {
+	display:block;
+	position:absolute;
+	top: 0;
+	left:0;
+	overflow:hidden;
+	width:100%;
+	height:100%;
+	z-index:1;
+	background-image : url('../images/Monet_Saint-Georges-Majeur.jpg');
+	background-position:top left;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	visibility:hidden;
+}
+#container_image #image_filtree_monet {
+	display:block;
+	position:absolute;
+	top: 0;
+	right:0;
+	overflow:hidden;
+	width:50%;
+	height:100%;
+	z-index:2;
+	background-image : url('../images/Monet_Saint-Georges-Majeur_filtree.jpg');
+	background-position:top right;
+	background-repeat: no-repeat;
+	background-size: 600px 450px;
+	visibility:hidden;
+}
+/***************************************/
+/*** Section Aide, Exemple et Crédit ***/
+/***************************************/
+#container_aide_exemple_credit {
+	display:block;
+	position:absolute;
+	top:60px;
+	right:60px;
+	background-image:url('../images/tache_noire.png');
+	background-position:top right;
+	background-repeat: no-repeat;
+	width:289px;
+	height:335px;
+	background-color:transparent;
+	opacity:0;
+	transition: opacity 2.5s ease;
+}
+#container_aide_exemple_credit a.liens_bloc_aide {
+	display:block;
+	position:relative;
+	margin-left:46px;
+	text-align:center;
+	color:#fff;
+	font-family:Merienda;
+	text-decoration:none;
+}
+#container_aide_exemple_credit a.liens_bloc_aide:hover {
+	text-decoration:underline;
+}
+#container_aide_exemple_credit a.premier_lien {
+	margin-top:90px;
+}
+#container_aide_exemple_credit a.autres_liens {
+	margin-top:10px;
+}
+#zone_aide, #zone_credit {
+	display:block;
+	position:absolute;
+	left:calc(50% - 400px);
+	top: calc(50% - 225px + 50px);
+	width:760px;
+	height:410px;
+	padding:20px;
+	background-color:#fafafa;
+	z-index:1000;
+	visibility:hidden;
+	box-shadow: 0 0 10px 3px #252525 inset;
+}
+#zone_aide h2, #zone_credit h2 {
+	margin-bottom:12px;
+	text-align:center;
+}
+ol#texte_aide, ul#texte_credit {
+	margin:50px;
+}
+ol#texte_aide li, ul#texte_credit li {
+	padding-bottom:20px;
+}
+.fermeture_bloc {
+	display:block;
+	position:absolute;
+	top:0;
+	right:0;
+	width:40px;
+	height:30px;
+	border-left:2px solid #666;
+	border-bottom:2px solid #666;
+	line-height:20px;
+	padding-top:10px;
+	border-bottom-left-radius:6px;
+	font-family:icomoon;
+	text-align:center;
+	vertical-align:middle;
+	font-size:20px;
+	cursor: pointer;
+	z-index:1001;
+}
+#texte_exemple {
+	display:block;
+	visibility:hidden;
+	position:absolute;
+	top:calc(50% - 220px);
+	left:0;
+	width:100%;
+	text-align:center;
+}
+#fermeture_exemple {
+	visibility:hidden;
+	z-index:1004;
+	background-color:white;
+	opacity:0.75;
+}
+#fermeture_exemple:hover {
+	opacity:0.95;
+}
+/***************************************************/
+/*** Bouton de réinitialisation de l'application ***/
+/***************************************************/
+#reinitialiser {
+	display:block;
+	position:absolute;
+	top:120px;
+	left:-100px;
+	width:50px;
+	height:50px;
+	background-image:url('../images/tache1.png');
+	background-size:100% 100%;
+	cursor: pointer;
+	visibility:hidden;
+	z-index:10;
+	transition: left 1.5s ease;
+}
+#reinitialiser #bouton_reinitialiser {
+	display:block;
+	position:relative;
+	padding:10px;
+	line-height:30px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:icomoon;
+	color:#fa5aae;
+	font-size: 22px;
+	transform: scaleX(-1);
+}
+
+/**************************************************/
+/*** Bouton de validation ou de refus du filtre ***/
+/**************************************************/
+#refuser_image_filtree {
+	position:absolute;
+	bottom:44px;
+	left:calc(50% - 100px);
+	width:58px;
+	height:58px;
+	background-image:url('../images/tache2.png');
+	background-size:100% 100%;
+	cursor: pointer;
+	z-index:10;
+	opacity:0;
+	transition: opacity 1.5s ease;
+}
+#refuser_image_filtree #bouton_refuser {
+	display:block;
+	position:relative;
+	padding:10px;
+	line-height:38px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:icomoon;
+	color:#ce0000;
+	font-size: 18px;
+}
+#valider_image_filtree {
+	position:absolute;
+	bottom:50px;
+	right:calc(50% - 100px);
+	width:50px;
+	height:50px;
+	background-image:url('../images/tache3.png');
+	background-size:100% 100%;
+	cursor: pointer;
+	z-index:10;
+	opacity:0;
+	transition: opacity 1.5s ease;
+}
+#valider_image_filtree #bouton_valider {
+	display:block;
+	position:relative;
+	padding:9px;
+	line-height:34px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:icomoon;
+	color:#00bb00;
+	font-size: 22px;
+}
+
+
+/***********************************************/
+/*** Bouton pour enregistrer l'image filtrée ***/
+/***********************************************/
+#enregistrer_image_filtree {
+	position:absolute;
+	top:calc(50% - 35px);
+	left:6%;
+	width:70px;
+	height:70px;
+	background-image:url('../images/tache4.png');
+	background-size:100% 100%;
+	cursor: pointer;
+	z-index:10;
+	opacity:0;
+	transition: opacity 1.5s ease;
+}
+#enregistrer_image_filtree #bouton_enregistrer{
+	display:block;
+	position:relative;
+	padding:12px;
+	line-height:46px;
+	vertical-align:middle;
+	text-align:center;
+	font-family:icomoon;
+	color:#fa5aae;
+	font-size: 40px;
+}
+
+#enregistrer_image_filtree #bouton_enregistrer:hover {
+	color:#DB0676;
+}
+
+/**********************************************/
+/*** Zone proposant les filtres à appliquer ***/
+/**********************************************/
+#zone_filtres {
+	display:block;
+	position:absolute;
+	bottom:10px;
+	right:10px;
+	width:330px;
+	height:431px;
+	background-image:url('../images/aqua_bleu_fonce.png');
+	visibility:hidden;
+	opacity:0;
+	transition: opacity 1.5s ease;
+}
+#zone_filtres #container_trois_zones_filtres{
+	display:block;
+	position:relative;
+	margin-bottom:0;
+	margin-right:0;
+	margin-left:0;
+	width:100%;
+	height:auto;
+}
+h2#titre_filtres {
+	display:block;
+	position:absolute;
+	top:90px;
+	left:30px;
+	width:300px;
+	color:#fff;
+	font-size:16px;
+	font-weight:900;
+	text-align:center;
+}
+#les_filtres {
+	display:block;
+	position:absolute;
+	top:134px;
+	left:60px;
+	width:240px;
+	height:auto;
+	color:#fff;
+	font-size:15px;
+}
+#les_filtres ul {
+	margin:0;
+	list-style:outside;
+	list-style-type:none;
+	font-weight:600;
+}
+#les_filtres ul li {
+	padding-bottom:10px;
+	cursor: pointer;
+}
+#les_filtres ul li:last-child {
+	padding-bottom:0;
+}
+#les_filtres ul ul {
+	margin:0;
+	list-style:outside;
+	list-style-type:disc;
+	font-weight:normal;
+}
+#les_filtres ul ul li {
+	padding-bottom:0;
+}
+#les_filtres ul ul li:hover, #titre_couleurs:hover, #titre_autres:hover, #titre_miroir:hover {
+	text-decoration:underline;
+}
+.voir {
+	display:block;
+}
+.cacher {
+	display:none;
+}
+.icomoon {
+	font-family:icomoon;
+	font-weight:normal;	
+}
+#fantome {
+	display:none;
+}
+/***************************************/
+/*** Quelques icônes issus d'icomoon ***/
+/***************************************/
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?azi788');
+  src:  url('fonts/icomoon.eot?azi788#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?azi788') format('truetype'),
+    url('fonts/icomoon.woff?azi788') format('woff'),
+    url('fonts/icomoon.svg?azi788#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cheveron-down:before {
+  content: "\e900";
+}
+.icon-cheveron-up:before {
+  content: "\e901";
+}
+.icon-image:before {
+  content: "\e90d";
+}
+.icon-file-picture:before {
+  content: "\e927";
+}
+.icon-download:before {
+  content: "\e960";
+}
+.icon-upload:before {
+  content: "\e961";
+}
+.icon-spinner11:before {
+  content: "\e984";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
+.icon-checkmark2:before {
+  content: "\ea11";
+}
+.icon-arrow-up2:before {
+  content: "\ea3a";
+}
+.icon-arrow-down2:before {
+  content: "\ea3e";
+}
+/**********************************/
+/*** Un petit peu de responsive ***/
+/**********************************/
+
+@media screen and (max-width: 1540px), screen and (max-height: 810px) {
+	#zone_filtres {
+	bottom:-50px;
+	right:-60px;
+	}
+	#container_aide_exemple_credit {
+	top:-80px;
+	right:-80px;
+	}
+	#container_cadre, #zone_aide, #zone_credit, #bandeau {
+	transform: scale(0.9);
+    transform-origin: 0 0;
+	}
+}
+@media screen and (max-width: 1200px){
+	#container_cadre, #zone_aide, #zone_credit, #bandeau {
+	transform: scale(0.75);
+    transform-origin: 0 0;
+	}
+}

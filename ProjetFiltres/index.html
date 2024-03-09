@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="fr">
+
+<head>
+	<meta charset="utf-8">
+	<title>Manon's graphics, projet NSI</title>
+	<script src="./js/javascript.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Rock+Salt|Merienda">
+</head>
+
+<body onload="afficheBlocAide()">
+	<div id="bandeau"><h1>Manon's Graphics</h1></div>
+	
+	<!-- Bloc qui sert à définir le cadre avec la bordure externe avec une ombre externe -->
+	<div id="container_cadre">
+		<!--Bloc qui sert à définir l'espace pour l'image et son image filtrée ainsi que la bordure interne -->
+		<div id="container_image">
+			<!-- Bloc permettant d'afficher l'image de départ -->
+			<div id="image_origine_monet"></div>
+			<!-- Bloc permettant d'afficher l'image filtrée -->
+			<div id="image_filtree_monet"></div>
+			<!-- Bloc permettant d'afficher la barre verticale -->
+			<div id="barre_verticale"></div>
+			<!-- Bloc permettant d'afficher une ombre à l'intérieur du cadre -->
+			<div id="ombre_interne"></div>
+			<div class="fermeture_bloc" id="fermeture_exemple" title="Fermer l'exemple" onclick="fermeLexemple()">&#xea0f;</div>
+			
+			<!-- Zone permettant de déposer les images souhaitées -->
+			<div id="zone_depose_fichier" style="z-index:10;" ondrop="deposeImage(event);" ondragover="survoleZone(event);"ondragleave="quitteZone(event);">
+				<div id="message_depose_fichier">
+					<span class="plus_fonce">Déposez ici une image au format jpg, png ou gif.</span>
+					<br /><span class="plus_petit">(pas plus de 4000 pixels en largeur et en hauteur)</span><br />
+					<div id='icone_depose_fichier'>&#xe961;</div>
+				</div>
+			
+				<div id="message_erreur_taille"></div>
+			</div>
+			
+		</div>
+	</div>
+	
+	<!-- Bouton de réinitialisation en haut à gauche -->
+	<div id="reinitialiser" onclick="reinitialiserApp()" title="Réinitialiser l'application"><div id="bouton_reinitialiser">&#xe984;</div></div>
+	
+	<!-- Bouton croix pour refuser le filtre -->
+	<div id="refuser_image_filtree" class="cacher" onclick="refuserFiltre()" title="Annuler le filtre"><div id="bouton_refuser">&#xea0f;</div></div>
+	
+	<!-- Bouton validation pour accepter le filtre -->
+	<div id="valider_image_filtree" class="cacher" onclick="validerFiltre()" title="Valider le filtre"><div id="bouton_valider">&#xea10;</div></div>
+	
+	<!-- Bouton pour télécharger l'image filtrée -->
+	<div id="enregistrer_image_filtree" class="cacher" onclick="enregistrerFichier()" title="Télécharger le fichier"><div id="bouton_enregistrer">&#xe960;</div></div>
+	
+	<!-- Tâche en haut à droite contenant lien vers aide, exemple et crédits, on utilise void(0) pour éviter d'ouvrir le lien dans le navigateur -->
+	<div id="container_aide_exemple_credit" class="cacher">
+		<a href="javascript:void(0);" onclick="afficheLaide()" class="liens_bloc_aide premier_lien">Aide</a>
+		<a href="javascript:void(0);" onclick="MontreUnExemple();" class="liens_bloc_aide autres_liens">Exemple</a>
+		<a href="javascript:void(0);" onclick="MontreLesCredits();" class="liens_bloc_aide autres_liens">Crédits</a>
+	</div>
+	
+	<!-- Texte de l'aide dans le cadre -->
+	<div id="zone_aide">
+		<h2>Les étapes pour traiter vos images</h2>
+		<ol id="texte_aide">
+			<li>Dans un premier temps, déposez votre image dans le cadre.</li>
+			<li>Choisissez un filtre à appliquer.</li>
+			<li>Après sélection du filtre, comparez l'image d'origine et l'image filtrée en survolant le cadre.</li>
+			<li>Si l'image filtrée vous convient, validez-la afin de la télécharger ou lui appliquer un nouveau filtre.</li>
+			<li>A tout moment, vous pouvez réinitialiser l'application et déposer une nouvelle image à traiter.</li>
+		</ol>
+		<div class="fermeture_bloc" title="Fermer la page d'aide" onclick="fermeLaide()">&#xea0f;</div>
+	</div>
+	
+	<div id="zone_credit">
+		<h2>Crédits et références</h2>
+		<ul id="texte_credit">
+			<li>Image d'aquarelle bleu clair de fond de page <a href="https://fr.freepik.com/vecteurs-libre/aquarelle-texture-fond-dans-tons-bleu_1064674.htm">créée par rocketpixel</a>.</li>
+			<li>Autres images de fonds et tâches sous <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.fr">licence Creative Commons CC0</a>.</li>
+			<li>Icônes issues du projet <a href="https://icomoon.io/">icomoon</a> sous <a href="https://creativecommons.org/licenses/by-sa/4.0/">licence CC BY-SA 4.0</a> pour les icônes créées par Daniel Bruce, et les autres icônes sont sous <a href=https://creativecommons.org/licenses/by/4.0/deed.fr">licence CC BY 4.0</a>.</li>
+			<li>Plusieurs parties du code ont été tirées de <a href="https://developer.mozilla.org/fr/">MDN Web Docs</a>, du livre <i>Apprendre à développer avec Javascript</i>, ainsi que du site <a href="https://www.w3schools.com/">W3School</a> (et de forums en ligne).</li>
+		</ul>
+		<div class="fermeture_bloc" title="Fermer la page des crédits" onclick="fermeLecredit()">&#xea0f;</div>
+	</div>
+	
+	<div id="texte_exemple">Ci-dessous, un exemple avec application du filtre <em>Niveaux de gris</em>.</div>
+	
+	<!-- Ensemble des filtres proposés -->
+	<div id="zone_filtres" class="cacher">
+		<div id="container_trois_zones_filtres">
+			<h2 id="titre_filtres">Appliquer un filtre :</h2>
+			<div id="les_filtres">
+				<ul>
+					<li><span id="titre_couleurs" onclick="ouvrefermeCouleurs()" ><span class="icomoon">&#xe900;</span> Couleurs</span>
+						<ul id="liste_couleurs" class="cacher">
+							<li onclick="filtreApplique('gris')">Niveaux de gris</li>
+							<li onclick="filtreApplique('sepia')">Sépia</li>
+							<li onclick="filtreApplique('rouge')">Rouge</li>
+							<li onclick="filtreApplique('vert')">Vert</li>
+							<li onclick="filtreApplique('bleu')">Bleu</li>
+							<li onclick="filtreApplique('rose')">La vie en rose !</li>
+							<li onclick="filtreApplique('inversion')">Inversion</li>
+						</ul>
+					</li>
+					<li><span id="titre_miroir" onclick="ouvrefermeMiroir()"><span class="icomoon">&#xe900;</span> Miroir</span>
+						<ul id="liste_miroir" class="cacher">
+							<li onclick="filtreApplique('horizontal')">Horizontal</li>
+							<li onclick="filtreApplique('vertical')">Vertical</li>
+						</ul>
+					</li>
+					<li><span id="titre_autres" onclick="ouvrefermeAutres()"><span class="icomoon">&#xe900;</span> Autres</span>
+						<ul id="liste_autres" class="cacher">
+							<li onclick="filtreApplique('floufaible')">Flou faible</li>
+							<li onclick="filtreApplique('flouaccentue')">Flou ++</li>
+							<li onclick="filtreApplique('pixellisation')">Pixellisation</li>
+							<li onclick="filtreApplique('assombrir')">Assombrir</li>
+							<li onclick="filtreApplique('eclaircir')">&Eacute;claircir</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div id="bas_zone_filtres"></div>
+		</div>
+	</div>
+	
+	<!-- Zone des deux canvas : image de départ et image filtrée, invisible mais permettant d'effectuer les traitements graphiques -->
+	<div id="fantome">
+		<canvas id="canvas"></canvas>
+		<canvas id="canvasfiltre"></canvas>
+	</div>
+	
+	<!-- Toutes les globales js utilisées dans le fichier js -->
+	<script type="text/javascript">
+		const containercadre = document.getElementById('container_cadre');
+		const containerDepotFichier = document.getElementById('zone_depose_fichier');
+		const containerboite = document.getElementById('container_image');
+		const barreVerticale = document.getElementById('barre_verticale');
+		const imageOrigine = document.getElementById('image_origine_monet');
+		const imageDeplacement = document.getElementById('image_filtree_monet');
+		const messageDerreur = document.getElementById('message_erreur_taille');
+		const blocFiltreCouleurs = document.getElementById('liste_couleurs');
+		const titreFiltreCouleurs = document.getElementById('titre_couleurs');
+		const blocFiltreMiroir = document.getElementById('liste_miroir');
+		const titreFiltreMiroir = document.getElementById('titre_miroir');
+		const blocFiltreAutres = document.getElementById('liste_autres');
+		const titreFiltreAutres = document.getElementById('titre_autres');
+		const zoneFiltres = document.getElementById('zone_filtres');
+		const reinitialiserAppli = document.getElementById('reinitialiser');
+		const containerAide = document.getElementById('container_aide_exemple_credit');
+		const boutonRefusFiltre = document.getElementById('refuser_image_filtree');
+		const boutonValideFiltre = document.getElementById('valider_image_filtree');
+		const boutonEnregistreImage = document.getElementById('enregistrer_image_filtree');
+		largeurImageCadre = 600;
+		hauteurImageCadre = 450;
+		containerboite.onmousemove = deplacementBarreVerticale;
+		document.getElementById('bouton_envoyer_fichier').onclick = depotFichierImage;
+	</script>
+	
+</body>
+
+</html>
